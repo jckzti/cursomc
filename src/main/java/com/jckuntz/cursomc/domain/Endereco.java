@@ -2,25 +2,39 @@ package com.jckuntz.cursomc.domain;
 
 import java.io.Serializable;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+@Entity
 public class Endereco implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String logradouro;
 	private String numero;
 	private String complemento;
 	private String bairro;
-	private String ceo;
+	private String cep;
 	
+	@ManyToOne
+	@JoinColumn(name="cliente_id")
 	private Cliente cliente;
 	
+	@ManyToOne
+	@JoinColumn(name="cidade_id")
 	private Cidade cidade;
 	
 	public Endereco() {
 		
 	}
 
-	public Endereco(Integer id, String logradouro, String numero, String complemento, String bairro, String ceo,
+	public Endereco(Integer id, String logradouro, String numero, String complemento, String bairro, String cep,
 			Cliente cliente, Cidade cidade) {
 		super();
 		this.id = id;
@@ -28,7 +42,7 @@ public class Endereco implements Serializable {
 		this.numero = numero;
 		this.complemento = complemento;
 		this.bairro = bairro;
-		this.ceo = ceo;
+		this.cep = cep;
 		this.cliente = cliente;
 		this.setCidade(cidade);
 	}
@@ -73,12 +87,12 @@ public class Endereco implements Serializable {
 		this.bairro = bairro;
 	}
 
-	public String getCeo() {
-		return ceo;
+	public String getCep() {
+		return cep;
 	}
 
-	public void setCeo(String ceo) {
-		this.ceo = ceo;
+	public void setCep(String cep) {
+		this.cep = cep;
 	}
 
 	public Cliente getCliente() {
